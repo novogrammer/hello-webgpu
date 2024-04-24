@@ -55,9 +55,13 @@ async function mainAsync(){
   if(!context){
     throw new Error("context is null");
   }
+  // const canvasFormat=navigator.gpu.getPreferredCanvasFormat()
+  const canvasFormat="rgba16float";
   context.configure({
     device: device,
-    format: navigator.gpu.getPreferredCanvasFormat(),
+    format: canvasFormat,
+    // colorSpace:"srgb",
+    // colorSpace:"display-p3",
     alphaMode: "premultiplied",
   });
   const vertices = new Float32Array([
@@ -105,7 +109,7 @@ async function mainAsync(){
       entryPoint: "fragment_main",
       targets: [
         {
-          format: navigator.gpu.getPreferredCanvasFormat(),
+          format: canvasFormat,
         },
       ],
     },
